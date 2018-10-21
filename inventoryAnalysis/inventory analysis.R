@@ -39,6 +39,10 @@ numeric_fields <- table_fields[table_fields$DATA_TYPE == "int" & table_fields$fi
 #####################################################
 # build the shiny app
 ui <- fluidPage(
+  tags$head(
+    tags$script(src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/3.5.16/iframeResizer.contentWindow.min.js",
+                type="text/javascript")
+  ),
   useShinyjs(), 
   dashboardPage(
     dashboardHeader(
@@ -53,7 +57,8 @@ ui <- fluidPage(
     dashboardBody(
       plotOutput("plotBar")
     )
-  )
+  ),
+  HTML('<div data-iframe-height></div>')
 )
 
 server <- function(input, output, session) {

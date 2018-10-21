@@ -8,6 +8,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.file;
+import java.io.FileOutputStream;
+
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 
 import com.gcu.model.Donations;
 import com.gcu.model.User;
@@ -137,8 +145,62 @@ public class DataService implements UserDataInterface<T>
 	}
 	return null;
 }
+
+public void getXLS(Donations donations)
+{
+	System.out.println(donations.getTableID() + "->");
+	Connection conn = null;
+	String sql = "SELECT * FROM u425692621_table.'" + donations.getTableName() + "'";
+	System.out.println(sql);
+	int count = 0;
 	
+	Connection conn = null;
+	try
+	{
+		conn = DriverManager.getConnection(url, username, password);
+		Statement stmt = conn.createStatement();
+		ResultSet rs = stmt.executeQuery(sql);
+    	XSSFWorkbook workbook = new XSSFWorkbook(); 
+    	XSSFSheet spreadsheet = workbook.createSheet("employe db");
+    
+    	XSSFRow row = spreadsheet.createRow(1);
+    	XSSFCell cell;
+    	cell = row.createCell(1);
+    	cell.setCellValue("EMP ID");
+    	cell = row.createCell(2);
+    	cell.setCellValue("EMP NAME");
+    	cell = row.createCell(3);
+    	cell.setCellValue("DEG");
+    	cell = row.createCell(4);
+    	cell.setCellValue("SALARY");
+    	cell = row.createCell(5);
+    	cell.setCellValue("DEPT");
+    	int i = 2;
+
+    	while(resultSet.next()) {
+    	row = spreadsheet.createRow(i);
+       	cell = row.createCell(1);
+       	cell.setCellValue(resultSet.getInt("eid"));
+       	cell = row.createCell(2);
+       	cell.setCellValue(resultSet.getString("ename"));
+       	cell = row.createCell(3);
+       	cell.setCellValue(resultSet.getString("deg"));
+       	cell = row.createCell(4);
+       	cell.setCellValue(resultSet.getString("salary"));
+       	cell = row.createCell(5);
+       	cell.setCellValue(resultSet.getString("dept"));
+       	i++;
+    }
+ }
+
+    FileOutputStream out = new FileOutputStream(new File("exceldatabase.xlsx"));
+    workbook.write(out);
+    out.close();
+    System.out.println("exceldatabase.xlsx written successfully");
+ }
+}
 	
+	/*
 	
 	public Table listAllTables(Table table)
 	{
@@ -150,5 +212,8 @@ public class DataService implements UserDataInterface<T>
 	}
 		
 	}
+	
+	*/
+	
 }
 

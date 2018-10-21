@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.gcu.model.Donations;
 import com.gcu.model.User;
 
 
@@ -51,6 +52,7 @@ public class DataService implements UserDataInterface<T>
 		}
 		return create;
 	}
+	
 	@Override
 	public User login(String Email, String password) {
 		System.out.println(Email + "->");
@@ -94,5 +96,59 @@ public class DataService implements UserDataInterface<T>
 		return null;
 	}
 	
+	public Donations readtable(Donations donations)
+	System.out.println(donations.getid + "->");
+	Donation
+	Connection conn = null;
+	String sql = "SELECT * FROM u425692621_table.USER WHERE EMAIL = '" + Email + "' AND PASSWORD = '"
+			+ password + "'";
+	System.out.println(sql);
+	int count = 0;
+	try {
+		conn = DriverManager.getConnection(url, username, password);
+		Statement stmt = conn.createStatement();
+		ResultSet rs = stmt.executeQuery(sql);
+
+		System.out.println("Test 1.");
+		System.out.println(count);
+
+		while (rs.next()) { 
+			count++;
+			userInfo.setPassword(rs.getString("PASSWORD"));
+			userInfo.setEmail(rs.getString("EMAIL"));
+		}
+		if (count == 1) {
+
+			return userInfo;
+		} else {
+			return null;
+		}
+
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		if (conn != null) {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	return null;
+}
+	
+	
+	
+	public Table listAllTables(Table table)
+	{
+		
+		DatabaseMetaData md = conn.getMetaData();
+	ResultSet rs = md.getTables(null, null, "%", null);
+	while (rs.next()) {
+	  System.out.println(rs.getString(3));
+	}
+		
+	}
 }
 

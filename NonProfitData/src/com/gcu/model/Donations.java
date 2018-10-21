@@ -10,6 +10,8 @@ public class Donations
 	private double individualCost;
 	private double toatlValue;
 	private String description;
+	private String tableName;
+	private int tableID;
 	
 	//Constructor
 	public Donations()
@@ -22,11 +24,13 @@ public class Donations
 		quanitiy = 0;
 		individualCost = 0.0;
 		toatlValue = 0.0;
+		tableName = "";
+		tableID = 0;
 	}
 	
 	//Other constructor
 	public Donations(String donorName, String category, int quanitiy, String itemName, String size,
-			double individualCost, double toatlValue, String description) {
+			double individualCost, double toatlValue, String description, String tableName, int tableID) {
 		super();
 		this.donorName = donorName;
 		this.category = category;
@@ -36,6 +40,8 @@ public class Donations
 		this.individualCost = individualCost;
 		this.toatlValue = toatlValue;
 		this.description = description;
+		this.tableName = tableName;
+		this.tableID = tableID;
 	}
 	
 	//Getters and Setters
@@ -86,6 +92,30 @@ public class Donations
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getItemSize() {
+		return itemSize;
+	}
+
+	public void setItemSize(String itemSize) {
+		this.itemSize = itemSize;
+	}
+
+	public String getTableName() {
+		return tableName;
+	}
+
+	public void setTableName(String tableName) {
+		this.tableName = tableName;
+	}
+
+	public int getTableID() {
+		return tableID;
+	}
+
+	public void setTableID(int tableID) {
+		this.tableID = tableID;
 	}
 	
 }

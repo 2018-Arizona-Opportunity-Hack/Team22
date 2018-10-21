@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.gcu.business.TableBusinessInterface;
 import com.gcu.data.UserDataInterface;
+import com.gcu.model.Donations;
 import com.gcu.model.User;
 
 
@@ -64,8 +65,11 @@ public class UserController
 	}
 	
 	@RequestMapping(path="/displayTable",method=RequestMethod.POST)
-	public ModelAndView Main(@Valid @ModelAttribute("user")User user, BindingResult result)
+	public ModelAndView TableList(@Valid @ModelAttribute("Donations")Donations donations, BindingResult result)
 	{
+		//List<Tables> tables1 = new ArrayList<Tables>();
+		service.
+		
 		return new ModelAndView("main", "user", new User("", "", 0));
 	}
 	
